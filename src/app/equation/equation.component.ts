@@ -57,7 +57,7 @@ export class EquationComponent implements OnInit {
 
   ngOnInit() {
     // Average solving time logic
-    const startTime = new Date();
+    let startTime = new Date();
     let numberSolved = 0;
 
     // Correct answer observer
@@ -82,6 +82,17 @@ export class EquationComponent implements OnInit {
 
     // Chooses correct MathControl based on selected operation
     this.mathForm.controls.operation.valueChanges.subscribe(operation => {
+      // Reset time per solution
+      this.secondsPerSolution = 0;
+      startTime = new Date();
+      numberSolved = 0;
+      // Reset form
+      const numbers = this.mathForm.controls.numbers.value;
+      this.mathForm.patchValue({
+        a: this.generateRandomInteger(numbers),
+        b: this.generateRandomInteger(numbers),
+        answer: ''
+      });
       switch (operation) {
         case '+':
           this.mathForm.setValidators(MathValidators.addition('answer', 'a', 'b'));
@@ -101,6 +112,17 @@ export class EquationComponent implements OnInit {
 
     // Changes random numbers range
     this.mathForm.controls.numbers.valueChanges.subscribe(nums => {
+      // Reset time per solution
+      this.secondsPerSolution = 0;
+      startTime = new Date();
+      numberSolved = 0;
+      // Reset form
+      const numbers = this.mathForm.controls.numbers.value;
+      this.mathForm.patchValue({
+        a: this.generateRandomInteger(numbers),
+        b: this.generateRandomInteger(numbers),
+        answer: ''
+      });
       switch (nums) {
         case '10':
           this.mathForm.patchValue({

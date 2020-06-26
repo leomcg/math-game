@@ -1,37 +1,39 @@
-<form [formGroup]="mathForm">
+<div class="container background">
+  <h1 class="text-center">Desafio de Matemática</h1>
+  <form [formGroup]="mathForm">
+    <div class="row">
+      <div class="col-md-6">
+        <label for="operations">Escolha seu desafio:</label>
+        <select class="custom-select" id="operations" formControlName="operation">
+          <option value="+">Adição</option>
+          <option value="-">Subtração</option>
+          <option value="*">Multiplicação</option>
+          <option value="/">Divisão</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="numbers">Números:</label>
+        <select class="custom-select" name="numbers" formControlName="numbers">
+          <option value="10">0 - 10 (Iniciante)</option>
+          <option value="100">0 - 100 (Intermediário)</option>
+          <option value="1000">0 - 1000 (Profissional)</option>
+        </select>
+      </div>
+    </div>
+    <hr>
+      <div class="col-md-6">
+        <div class="col-md-6">
+          <h1 class="text-center">{{ a }} {{ getOperationSign() }} {{ b }} =</h1>
+        </div>
+        <div class="col-md-6">
+          <input class="form-control" formControlName="answer">
+        </div>
+      </div>
+  </form>
+  <hr>
   <div>
-    <label for="operations">Escolha seu desafio:</label>
-    <select id="operations" formControlName="operation">
-      <option value="+">Adição</option>
-      <option value="-">Subtração</option>
-      <option value="*">Multiplicação</option>
-      <option value="/">Divisão</option>
-    </select>
-    <label for="numbers">Números:</label>
-    <select name="numbers" formControlName="numbers">
-      <option value="10">0 - 10 (Iniciante)</option>
-      <option value="100">0 - 100 (Intermediário)</option>
-      <option value="1000">0 - 1000 (Profissional)</option>
-    </select>
+    Tempo médio de cada solução: {{ secondsPerSolution | number: '1.1-2' }}s.
   </div>
-  <div>
-    {{ a }} {{ getOperationSign() }} {{ b }} =
-    <input formControlName="answer">
-  </div>
-</form>
-
-<div>
-  <p>Tempo médio de cada solução: {{ secondsPerSolution | number: '1.1-2' }}s</p>
 </div>
 
-<hr>
 
-<div>
-  Form is valid: {{ mathForm.valid }}
-</div>
-<div>
-  Form values: {{ mathForm.value | json }}
-</div>
-<div>
-  Form errors: {{ mathForm.errors | json }}
-</div>
